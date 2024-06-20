@@ -38,13 +38,15 @@ function App() {
   const [turn, setTurn] = useState(TURNS.X);
   const [winner, setWinner] = useState(null);
 
-  const checkwinner = (boardToCheck) => {
-    for (const combo in WINNER_COMBOS) {
+  const checkWinner = (boardToCheck) => {
+    for (const combo of WINNER_COMBOS) {
       const [a, b, c] = combo;
       if (boardToCheck[a] && boardToCheck[a] === boardToCheck[b] && boardToCheck[a] === boardToCheck[c]) {
+  
         return boardToCheck[a];
       }
     }
+
     return null
 
   }
@@ -70,7 +72,8 @@ function App() {
     setTurn(newTurn);
     
 
-    const newWinner = checkwinner(newBoard);
+    const newWinner = checkWinner(newBoard);
+   
 
     if(newWinner){
       setWinner(newWinner);
@@ -102,8 +105,9 @@ function App() {
           {TURNS.O}
         </Square>
       </section>
+        
 
-      { winner !== null && ( 
+     { winner !== null && ( 
         <section className="winner">
             <div className="text">
               <h2>
@@ -117,11 +121,12 @@ function App() {
               <footer>
                 <button onClick={resetgame}>Empezar de nuevo</button>
               </footer>            
+         
             </div>
 
         </section> 
         )
-      }
+      } 
     </main>
   )
 

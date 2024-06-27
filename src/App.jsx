@@ -7,17 +7,11 @@ import { WinnerModal } from "./components/WinnerModal";
 
 
  
-
-
-
-
 function App() {
-
 
   const [board, setBoard] = useState(() =>{
     const board = window.localStorage.getItem('board');
     return board ? JSON.parse(board) : Array(9).fill(null);
-  
   });
 
   const [turn, setTurn] = useState(() =>{
@@ -25,22 +19,18 @@ function App() {
     return turn ? turn : TURNS.X;
   
   });
+
   const [winner, setWinner] = useState(null);
 
   
 
   const resetGame = () => {
-
     setBoard(Array(9).fill(null));
     setTurn(TURNS.X);
     setWinner(null);
     window.localStorage.removeItem('board');
     window.localStorage.removeItem('turn');
-
   }
-
- 
-
 
   const updateBoard = (index) => {
     if(board[index] || winner) return
@@ -48,8 +38,6 @@ function App() {
     const newBoard = [...board];
     newBoard[index] = turn;
     setBoard(newBoard);
-
-
 
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X;
     setTurn(newTurn);
@@ -59,15 +47,12 @@ function App() {
 
     const newWinner = checkWinnerFrom(newBoard);
    
-
     if(newWinner){
       confetti();
       setWinner(newWinner);
     } else if(checkEndGame(newBoard)){
       setWinner(false);
     }
-
-
   }
 
   return (
@@ -94,12 +79,9 @@ function App() {
           {TURNS.O}
         </Square>
       </section>
-        
       <WinnerModal winner={winner} resetGame={resetGame}/>
-        
     </main>
   )
-
 }
 
 export default App
